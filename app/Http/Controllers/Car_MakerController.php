@@ -7,11 +7,16 @@ use App\Models\Car_Maker;
 
 class Car_MakerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $car_makers = Car_Maker::get();
+        $search = $request->input('search');
 
-        return view('car_makers.index', compact('car_makers'));
+        $car_makers = Car_Maker::withCount('car_types')
+            ->when($search, fn ($q) => $q->where('name', 'like', "%{$search}%"))
+            ->orderBy('name')
+            ->get();
+
+        return view('car_makers.index', compact('car_makers', 'search'));
     }
 
     public function create()
@@ -25,12 +30,11 @@ class Car_MakerController extends Controller
             'name' => ['required', 'string', 'max:255'],
         ]);
 
-        $car_maker = Car_Maker::create($validated);
-        $car_makers= Car_Maker::all();
+        Car_Maker::create($validated);
 
         return redirect()
-            ->route('car_makers.index', compact('car_makers'))
-            ->with('status', 'Autó Gyártó létrehozva');
+            ->route('car_makers.index')
+            ->with('status', 'Autó Gyártó létrehozva!');
     }
 
     /**
@@ -41,7 +45,7 @@ class Car_MakerController extends Controller
         //
     }
 
-    public function edit(string $id)
+    public function edit(Car_Maker $car_maker)
     {
         return view('car_makers.edit', compact('car_maker'));
     }
@@ -49,7 +53,7 @@ class Car_MakerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Car_Maker $car_maker)
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -58,19 +62,19 @@ class Car_MakerController extends Controller
         $car_maker->update($validated);
 
         return redirect()
-            ->route('car_makers.index', $car_maker)
+            ->route('car_makers.index')
             ->with('status', 'Autó Gyártó frissítve!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Car_Maker $car_maker)
     {
         $car_maker->delete();
 
         return redirect()
             ->route('car_makers.index')
-            ->with('status', 'Autó Gáyrtó törölve!');
+            ->with('status', 'Autó Gyártó törölve!');
     }
 }

@@ -9,3 +9,15 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@layer components {
+    .card { @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl shadow-black/40; }
+    .input { @apply w-full rounded-xl border border-white/10 bg-slate-900/60 px-4 py-2.5 text-slate-100 placeholder-slate-500 outline-none transition focus:border-violet-400 focus:ring-2 focus:ring-violet-500/40; }
+    .btn-primary { @apply inline-flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/20 transition hover:-translate-y-0.5 hover:brightness-110; }
+    .btn-ghost { @apply inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-slate-200 transition hover:bg-white/10; }
+    .btn-danger { @apply inline-flex cursor-pointer items-center gap-2 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-1.5 text-xs font-semibold text-rose-300 transition hover:bg-rose-500/20; }
+    .btn-small { @apply inline-flex cursor-pointer items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-200 transition hover:bg-white/10; }
+    .label { @apply mb-1.5 block text-sm font-medium text-slate-300; }
+    .error { @apply mt-1 text-sm text-rose-400; }
+  }
+  select.input option { background-color: #0f172a; }

@@ -14,6 +14,6 @@ class Car_Maker extends Model
 
     public function car_types()
     {
-        return $this->hasMany(Car_Type::class);
+        return $this->hasMany(Car_Type::class, 'car_maker_id');
     }
 }

@@ -1,15 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Új Autó Gyártó</h1>
-
-  <form action="{{ route('car_makers.store') }}" method="POST">
-      @csrf
-
-      <label for="name">Autó Gyártó neve</label>
-      <input type="text" name="name" id="name" value="{{ old('name') }}" required>
-
-      <button type="submit">Mentés</button>
-      <a href="{{ route('car_makers.index') }}">Mégse</a>
-  </form>
+<h1 class="mb-6 text-3xl font-bold text-white">Új Autó Gyártó</h1>
+<form action="{{ route('car_makers.store') }}" method="POST" class="card max-w-xl p-6">
+    @csrf
+    @include('car_makers._form')
+</form>
 @endsection

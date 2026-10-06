@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class Car_MakerSeeder extends Seeder
 {
     const CAR_MAKERS = [
-        'Wolksvagen',
+        'Volkswagen',
         'Mercedes',
         'Ford',
         'BMW',

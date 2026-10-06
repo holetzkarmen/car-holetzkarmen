@@ -18,6 +18,6 @@ class Car_Type extends Model
 
     public function car_maker()
     {
-        return $this->belongsTo(Car_Maker::class);
+        return $this->belongsTo(Car_Maker::class, 'car_maker_id');
     }
 }
